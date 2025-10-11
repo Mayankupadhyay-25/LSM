@@ -1,4 +1,4 @@
-import { createContext }  from "react";
+import React, { createContext }  from "react";
 
 export const AppContext = createContext() 
 
@@ -10,7 +10,7 @@ export const AppContextProvider = (props)=>{
 
     return(
         <AppContext.Provider value ={value}>   
-            {Props.children}
+            {props.children}
         </AppContext.Provider>
     )
 
