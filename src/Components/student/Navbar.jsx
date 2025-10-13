@@ -3,6 +3,8 @@ import assets from "../../assets/assets";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+
+  const isCoursePage =location.pathname.includes("/Course-list");
   return (
     <div className="flax items-center justify-between px-4 md:px-10 lg:px-36 border-b border-gray-500 py-4">
       <img
