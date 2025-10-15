@@ -11,6 +11,7 @@ import Dashboard from "./pages/educator/Dashboard";
 import AddCourse from "./pages/educator/AddCourse";
 import MyCourses from "./pages/educator/MyCourses";
 import StudentEnrolled from "./pages/educator/StudentEnrolled";
+import Navbar from "./Components/student/Navbar";
 
 
 
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="My-courses" element={<MyCourses/>} />
           <Route path="Students-enrolled" element={<StudentEnrolled/>} />
         </Route>
+        <Route path="Navbar" element={<Navbar/>}/>
       </Routes>
     </div>
   );
