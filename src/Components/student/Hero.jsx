@@ -10,4 +10,3 @@ const Hero = () => {
 
 export default Hero
 // src/Components/student/Hero.jsx
-//noyhing
