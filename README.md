@@ -14,3 +14,15 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Clerk configuration and environment keys
+
+- **Do not** commit real environment files. This repo contains example env files: `.env.example` and `.env.production.example`.
+- Set your Clerk publishable key as `VITE_CLERK_PUBLISHABLE_KEY` in your hosting provider (Vercel/Netlify/etc.) for production.
+- Development instances may show a message: "Clerk has been loaded with development keys." Replace with your production key before deploying.
+
+Example local development entry (copy to `.env` locally, do not commit):
+
+```
+VITE_CLERK_PUBLISHABLE_KEY=pk_live_your_publishable_key_here
+```
