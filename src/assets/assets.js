@@ -184,6 +184,15 @@ export const dummyStudentEnrolled = [
     },
     {
         "student": {
+            "_id": "user_3qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+            "name": "GreatStack",
+            "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+        },
+        "courseTitle": "Introduction to JavaScript",
+        "purchaseDate": "2024-12-20T08:39:55.509Z"
+    },
+    {
+        "student": {
             "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
             "name": "GreatStack",
             "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
@@ -271,12 +280,13 @@ export const dummyCourses = [
         "enrolledStudents": [
             "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
             "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "user_2qjlgkAqIMpiR2flWIRzvWKtE0w"
+            "user_2qjlgkAqIMpiR2flWIRzvWKtE0w",
+            "user_3qQlvXyr02B4Bq6hT0Gvaa5fT9V"
         ],
         "courseRatings": [
             {
                 "userId": "user_2qjlgkAqIMpiR2flWIRzvWKtE0w",
-                "rating": 5,
+                "rating": 4,
                 "_id": "6773e37360cb0ab974342314"
             }
         ],
