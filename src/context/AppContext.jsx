@@ -9,7 +9,8 @@ export const AppContextProvider = ({ children }) => {
     const navigate = useNavigate();
 
 
-    const [allCourses, setAllCourses] = useState([]);
+    const [allCourses, setAllCourses] = useState([])
+    const [isEducator, setIsEducator] = useState(true)
 
     const fetchAllCourses = async () => {
         setAllCourses(dummyCourses);
@@ -34,7 +35,9 @@ export const AppContextProvider = ({ children }) => {
         navigate,
         setAllCourses,
         fetchAllCourses,
-        calculateRating 
+        calculateRating,
+        isEducator,
+        setIsEducator
     };
 
     return (
