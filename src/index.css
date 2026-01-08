@@ -20,9 +20,9 @@
 
   /* ---------- Grid ---------- */
   --grid-auto-fit: repeat(auto-fit, minmax(200px, 1fr));
-  --grid-auto: repeat(auto-fit, minmax(200px, 1fr));
+  
 
   /* ---------- Spacing ---------- */
   --spacing-section-height: 500px;
-  --section-height: 500px;
+  
 }
