@@ -5,7 +5,7 @@ import CoursesList from "./pages/student/CoursesList";
 import CourseDetails from "./pages/student/CourseDetails";
 import MyEnrollments from "./pages/student/MyEnrollments";
 import Player from "./pages/student/Player";
-import Loading from "./components/student/Loading";
+import Loading from "./Components/student/Loading";
 import Educator from "./pages/educator/Educator";
 import Dashboard from "./pages/educator/Dashboard"; 
 import AddCourse from "./pages/educator/AddCourse";
@@ -21,19 +21,19 @@ const App = () => {
       {!isEducatorRoute && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Course-list" element={<CoursesList />} />
-        <Route path="/Course-list/:input" element={<CoursesList />} />
-        <Route path="/Course/:id" element={<CourseDetails />} />
-        <Route path="/My-enrollments" element={<MyEnrollments />} />
+        <Route path="/course-list" element={<CoursesList />} />
+        <Route path="/course-list/:input" element={<CoursesList />} />
+        <Route path="/course/:id" element={<CourseDetails />} />
+        <Route path="/my-enrollments" element={<MyEnrollments />} />
         <Route path="/player/:courseId" element={<Player />} />
         <Route path="/loading/:path" element={<Loading />} />
         <Route path="/educator" element={<Educator />}>
-          <Route path="educator" element={<Dashboard />} />
+          <Route index element={<Dashboard />} />
           <Route path="add-course" element={<AddCourse/>} />
-          <Route path="My-courses" element={<MyCourses/>} />
-          <Route path="Students-enrolled" element={<StudentEnrolled/>} />
+          <Route path="my-courses" element={<MyCourses/>} />
+          <Route path="students-enrolled" element={<StudentEnrolled/>} />
         </Route>
-        <Route path="Navbar" element={<Navbar/>}/>
+        <Route path="/navbar" element={<Navbar/>}/>
       </Routes>
     </div>
   );
