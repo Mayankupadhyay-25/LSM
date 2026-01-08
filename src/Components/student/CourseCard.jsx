@@ -26,7 +26,7 @@ const CourseCard = ({ course }) => {
         alt={course.courseTitle}/>
       <div className="p-3 text-left">
         <h3 className="text-base font-semibold">{course.courseTitle}</h3>
-        <p className="text-gray-500">{typeof course.educator === 'string' ? '' : course.educator?.name}</p>
+        <p className="text-gray-500">GreatStack{typeof course.educator === 'string' ? '' : course.educator?.name}</p>
         <div className="flex items-center space-x-2">
               <p>{calculateRating(course)}</p>
           <span className="text-sm font-medium">{avgRating.toFixed(1)}</span>
