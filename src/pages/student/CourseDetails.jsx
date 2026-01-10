@@ -5,12 +5,14 @@ import Loading from "../../Components/student/Loading";
 import { assets } from "../../assets/assets";
 import humanizeDuration from "humanize-duration";
 import Footer from "../../Components/student/Footer";
+import YouTube from "react-youtube";
 
 const CourseDetails = () => {
   const { id } = useParams();
   const [courseData, setCourseData] = useState(null);
   const [openSection, setOpenSection] = useState({});
   const [isAlreadyEnrolled, setIsAlreadyEnrolled] = useState(true);
+  const [playerData, setIsPlayerData] = useState(null);
 
   const {
     allCourses,
@@ -32,7 +34,8 @@ const CourseDetails = () => {
   const avgRating = calculateRating(courseData) || 0;
   const enrolledCount = courseData.enrolledStudents?.length ?? 0;
   const priceNum = Number(courseData.coursePrice) || 0;
-  const discountPct = Number(courseData.courseDiscount ?? courseData.discount ?? 0) || 0;
+  const discountPct =
+    Number(courseData.courseDiscount ?? courseData.discount ?? 0) || 0;
   const finalPrice = priceNum * (1 - discountPct / 100);
 
   const toggleSection = (index) => {
@@ -40,6 +43,15 @@ const CourseDetails = () => {
       ...prev,
       [index]: !prev[index],
     }));
+  };
+
+  const extractYouTubeId = (url) => {
+    if (!url) return null;
+    // common patterns: youtu.be/ID or youtube.com/watch?v=ID or /embed/ID
+    const m = url.match(/(?:youtu\.be\/|v=|embed\/)([0-9A-Za-z_-]{11})/);
+    if (m && m[1]) return m[1];
+    const parts = url.split('/');
+    return parts.pop();
   };
 
   return courseData ? (
@@ -134,7 +146,14 @@ const CourseDetails = () => {
                             <p>{lecture.lectureTitle}</p>
                             <div className="flex gap-2">
                               {lecture.isPreviewFree && (
-                                <span className="text-blue-500 cursor-pointer">
+                                <span
+                                  onClick={() =>
+                                    setIsPlayerData({
+                                      videoId: extractYouTubeId(lecture.lectureUrl),
+                                    })
+                                  }
+                                  className="text-blue-500 cursor-pointer"
+                                >
                                   Preview
                                 </span>
                               )}
@@ -168,27 +187,53 @@ const CourseDetails = () => {
         {/* Right column */}
         <div
           className="max-w-course-card z-10 shadow-custom-card rounded-t md:rounded-none overflow-hidden
-         bg-white min-w-[300px] sm:min-w-[420px]"
-        >
-          <img src={courseData.courseThumbnail} alt="" />
+         bg-white min-w-[300px] sm:min-w-[420px]" >
+
+          { 
+              playerData ? 
+                <YouTube
+                  videoId={playerData.videoId}
+                  opts={{ playerVars: { autoplay: 1 } }}
+                  iframeClassName="w-full aspect-video"/>
+                :<img src={courseData.courseThumbnail} alt="" />
+              }
+          
           <div className="p-5">
             <div className="flex item-center gap-2">
-              <img className="w-3.5"
-                src={assets.time_left_clock_icon} alt="time left clock icon" />
+                <img
+                  className="w-3.5"
+                  src={assets.time_left_clock_icon}
+                  alt="time left clock icon"/>
+              
+
+              <img className="w-3.5" src={assets.time_left_clock_icon}
+                alt="time left clock icon" />
               <p className="text-red-500">
-                <span className="font-medium">5 Days </span>left at this price!</p>
+                <span className="font-medium">5 Days </span>left at this price!
+              </p>
             </div>
 
             <div className="flex gap-3 item-center pt-2">
-              <p className="text-gray-800 md:text-4xl text-2xl font-semibold">{currency}{finalPrice.toFixed(2)}</p>
+              <p className="text-gray-800 md:text-4xl text-2xl font-semibold">
+                {currency}
+                {finalPrice.toFixed(2)}
+              </p>
               {discountPct > 0 && (
                 <>
-                  <p className="text-gray-500 pt-2.5 line-through">{currency}{priceNum.toFixed(2)}</p>
-                  <p className="text-green-600 pt-2.5 font-semibold">{discountPct}% off</p>
+                  <p className="text-gray-500 pt-2.5 line-through">
+                    {currency}
+                    {priceNum.toFixed(2)}
+                  </p>
+                  <p className="text-green-600 pt-2.5 font-semibold">
+                    {discountPct}% off
+                  </p>
                 </>
               )}
               {discountPct === 0 && (
-                <p className="text-gray-500">{currency}{priceNum.toFixed(2)}</p>
+                <p className="text-gray-500">
+                  {currency}
+                  {priceNum.toFixed(2)}
+                </p>
               )}
             </div>
             <div className="flex item-center text-sm md:text-default gap-4 pt-2 md:pt-4 text-gray-500">
@@ -204,21 +249,22 @@ const CourseDetails = () => {
                 <p>{calculateCourseDuration(courseData)} </p>
               </div>
 
-               <div className="h-4 w-px bg-gray-500/40"></div>
+              <div className="h-4 w-px bg-gray-500/40"></div>
 
               <div className="flex item-center gap-1">
                 <img src={assets.lesson_icon} alt="lesson icon" />
-                <p>{calculateNoOfLectures(courseData)} lessons</p> 
+                <p>{calculateNoOfLectures(courseData)} lessons</p>
               </div>
-
             </div>
 
             <button className="md:mt-6 mt-4 w-full py-3 rounded bg-blue-600 text-white font-medium">
-             {isAlreadyEnrolled ? "Already Enrolled" : 'Enroll Now'}</button>
+              {isAlreadyEnrolled ? "Already Enrolled" : "Enroll Now"}
+            </button>
 
-             <div className="pt-6">
+            <div className="pt-6">
               <p className="md:text-xl  text-lg font-medium text-gray-800">
-                What's is in the course?</p>
+                What's is in the course?
+              </p>
               <ul className="ml-4 pt-2 text-sm md:text-default list-disc text-gray-500">
                 <li>Life access with free updates</li>
                 <li>Step-by-step, hands-on project guidance.</li>
@@ -226,14 +272,16 @@ const CourseDetails = () => {
                 <li>Quizzes to test your Knowledge</li>
                 <li>certificate of completion</li>
               </ul>
-             </div>
+            </div>
           </div>
         </div>
         <div />
-      </div> 
+      </div>
       <Footer />
     </>
-  ) : <Loading />
+  ) : (
+    <Loading />
+  );
 };
 
 export default CourseDetails;
