@@ -27,6 +27,21 @@
   
 }
 
+/* Custom variables and utility classes */
+:root {
+  --max-width-course-card: 500px;
+  --box-shadow-custom-card: 0px 4px 15px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Utility classes to use in markup */
+.max-w-course-card {
+  max-width: var(--max-width-course-card);
+}
+
+.shadow-custom-card {
+  box-shadow: var(--box-shadow-custom-card);
+}
+
 /* Rich text styles for course description and content */
 @layer base {
   html { scroll-behavior: smooth; }
